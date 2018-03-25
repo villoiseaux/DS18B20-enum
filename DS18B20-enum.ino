@@ -1,11 +1,12 @@
 // Include the libraries we need
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include "RGBLed.h"
 
 // Data wire is plugged into port 14 on the Arduino
 #define ONE_WIRE_BUS 14
 // DAC precision
-#define TEMPERATURE_PRECISION 9
+#define TEMPERATURE_PRECISION 12
 
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 OneWire oneWire(ONE_WIRE_BUS);
@@ -15,13 +16,16 @@ DallasTemperature sensors(&oneWire);
 
 DeviceAddress thermometer;
 int deviceNumber;
+RgbLed displayLed(0,2,5);
 
 void setup(void)
 {
   // start serial port
   Serial.begin(9600);
-  Serial.println("Dallas Temperature IC Control Library Demo");
-
+  delay(1000);
+  Serial.println("\nDS18B20 Enumerator");
+  
+  
   // Start up the library
   sensors.begin();
 
